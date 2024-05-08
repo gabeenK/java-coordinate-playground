@@ -1,37 +1,26 @@
 package coordinate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Coordinate {
+
+	private final List<int[]> coordinateList;
+
+	private double result = 0;
+
+	public Coordinate(List<int[]> coordinateList) {
+		this.coordinateList = coordinateList;
+	}
+
 	public void drawCoordinate() {
 		System.out.println("좌표 출력");
-	}
-
-	public void printResult() {
-		System.out.println("결과 : ");
-	}
-
-
-	public static void main(String[] args) {
-		String[] string1 = new String[2];
-		string1[0] = "10";
-		string1[1] = "10";
-		String[] string2 = new String[2];
-		string2[0] = "14";
-		string2[1] = "15";
-
-		List<String[]> test = new ArrayList<>();
-		test.add(string1);
-		test.add(string2);
-
 
 		for (int y = 24; y >= 1; y--) {
 			StringBuilder sb = new StringBuilder();
 			drawVertical(sb, y);
 			for (int x = 1; x <= 24; x++) {
 				sb.append(" ").append(" ");
-				drawPoint(sb, y, x, test);
+				drawPoint(sb, y, x);
 			}
 			System.out.println(sb);
 		}
@@ -39,7 +28,7 @@ public abstract class Coordinate {
 		drawHorizontal();
 	}
 
-	static void drawVertical(StringBuilder sb, int y) {
+	void drawVertical(StringBuilder sb, int y) {
 		String format = String.format("%3s", y + "|");
 		if (y % 2 != 0) {
 			format = String.format("%3s", "|");
@@ -47,27 +36,45 @@ public abstract class Coordinate {
 		sb.append(format);
 	}
 
-	static void drawHorizontal() {
+	void drawHorizontal() {
 		System.out.print("  +");
-		for (int i = 0; i < 24; i++) {
+		for (int i = 1; i <= 24; i++) {
 			System.out.print("――");
+
 		}
 
 		System.out.println();
+		System.out.print("  0 ");
 
-		for (int i = 0; i <= 24; i++) {
+		for (int i = 1; i <= 24; i++) {
+			String format;
 			if (i % 2 == 0) {
-				String format = String.format("%4s", i + " ");
+				format = String.format("%4s", i);
 				System.out.print(format);
 			}
 		}
 	}
 
-	static void drawPoint(StringBuilder sb, int y, int x, List<String[]> list) {
-		list.forEach(a -> {
-			if (Integer.parseInt(a[0]) == x && Integer.parseInt(a[1]) == y) {
-				sb.append("#");
+	void drawPoint(StringBuilder sb, int y, int x) {
+		this.coordinateList.forEach(a -> {
+			if (a[0] == x && a[1] == y) {
+				sb.deleteCharAt(sb.length() - 1);
+				sb.append("*");
 			}
 		});
+	}
+
+	public void printResult() {
+		System.out.println();
+		System.out.print("결과: ");
+		System.out.print(getResult());
+	}
+
+	public List<int[]> getCoordinateList() {
+		return coordinateList;
+	}
+
+	public double getResult() {
+		return 0;
 	}
 }

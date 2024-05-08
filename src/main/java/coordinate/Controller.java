@@ -1,11 +1,13 @@
 package coordinate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Controller {
 
-	private final List<String[]> coordinateList = new ArrayList<>();
+	private final List<int[]> coordinateList = new ArrayList<>();
 
 	public void start(String input) {
 		makeCoordinate(input);
@@ -16,17 +18,18 @@ public class Controller {
 		String[] coordinates = input.split("-");
 		for (String coordinate : coordinates) {
 			coordinate = removeBracket(coordinate);
-			String[] spot = setSpotWithThrow(coordinate);
+			int[] spot = setSpotWithThrow(coordinate);
 			coordinateList.add(spot);
 		}
 	}
 
-	String[] setSpotWithThrow(String coordinate) {
+	int[] setSpotWithThrow(String coordinate) {
 		String[] spots = coordinate.split(",");
 		for (String spot : spots) {
 			validateNumberRange(Integer.parseInt(spot));
 		}
-		return spots;
+
+		return Stream.of(spots).mapToInt(Integer::parseInt).toArray();
 	}
 
 	String removeBracket(String str) {
