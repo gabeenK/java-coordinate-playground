@@ -1,4 +1,4 @@
-package coordinate;
+package coordinate.client;
 
 import java.util.Scanner;
 

@@ -1,11 +1,9 @@
 package coordinate.line;
 
 import coordinate.Draw;
-import coordinate.Point;
-import coordinate.Points;
-import coordinate.ResultFunction;
+import coordinate.vo.Point;
+import coordinate.vo.Points;
 
-import javax.xml.transform.Result;
 import java.util.List;
 
 public class LineDraw extends Draw {
@@ -24,4 +22,9 @@ public class LineDraw extends Draw {
 		 return Math.sqrt(Math.pow(pointList.get(0).getX() - pointList.get(1).getX(), 2)
 				+ Math.pow(pointList.get(0).getY() - pointList.get(1).getY(), 2));
 	}
+
+	@Override
+	public void validateShape(List<Point> pointList) {
+	}
+
 }

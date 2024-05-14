@@ -1,4 +1,4 @@
-package coordinate;
+package coordinate.vo;
 
 public class Point {
 	private int x;
