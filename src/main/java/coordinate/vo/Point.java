@@ -1,7 +1,7 @@
 package coordinate.vo;
 
 public class Point {
-	private int x;
+	private final int x;
 	private final int y;
 
 	public Point(int x, int y) {
